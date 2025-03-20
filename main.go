@@ -2,16 +2,9 @@ package main
 
 import (
 	"bufio"
-	"bytes"
 	"fmt"
 	"math/rand"
-	"net/http"
 	"os"
-	"os/exec"
-	"path/filepath"
-	"runtime"
-	"strconv"
-	"strings"
 	"time"
 )
 

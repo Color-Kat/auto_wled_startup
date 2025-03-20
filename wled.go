@@ -38,7 +38,7 @@ func getWledIP() string {
 func sendWledRequest(jsonData string) error {
 	wledIP := getWledIP()
 	if wledIP == "" {
-		return fmt.Errorf("WLED IP not set. Please set it in the menu.")
+		return fmt.Errorf("WLED IP not set. Please set it in the menu")
 	}
 	url := fmt.Sprintf("http://%s/json/state", wledIP)
 
@@ -65,6 +65,7 @@ func runRandomGradient() {
 	randVal := rand.Float32()
 	var jsonData string
 
+	// 25% Chance - Solid random color
 	if randVal < 0.25 {
 		r, g, b := rand.Intn(256), rand.Intn(256), rand.Intn(256)
 		jsonData = fmt.Sprintf(`{
@@ -77,7 +78,8 @@ func runRandomGradient() {
             }]
         }`, r, g, b)
 	} else {
-		paletteID := rand.Intn(56) // Палитры от 0 до 55
+		// 75% - Random pallet for effect Blends
+		paletteID := rand.Intn(56) // Rand pallet from 0 to 55
 		jsonData = fmt.Sprintf(`{
             "on": true,
             "bri": 250,
@@ -97,8 +99,10 @@ func runRandomGradient() {
 
 func runPreset(scanner *bufio.Scanner) {
 	fmt.Print("Enter Preset ID: ")
+
 	scanner.Scan()
 	presetID, err := strconv.Atoi(scanner.Text())
+
 	if err != nil {
 		fmt.Println("Invalid Preset ID. Must be a number.")
 		return
@@ -106,6 +110,7 @@ func runPreset(scanner *bufio.Scanner) {
 
 	jsonData := fmt.Sprintf(`{"on": true, "ps": %d}`, presetID)
 	err = sendWledRequest(jsonData)
+
 	if err != nil {
 		fmt.Println("Error:", err)
 	}
