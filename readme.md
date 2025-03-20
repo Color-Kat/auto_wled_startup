@@ -38,3 +38,9 @@ providing features like automatic startup.
 
 - **No effect**: Check IP in `wled_config.txt` and network.
 - **Autostart fails**: Verify startup folder (Windows) or service (Linux/macOS).
+
+## Open-source
+
+We are open to contributions! This project is licensed under the MIT License.
+
+
